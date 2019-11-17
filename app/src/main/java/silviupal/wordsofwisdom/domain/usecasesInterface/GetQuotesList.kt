@@ -7,5 +7,5 @@ import silviupal.wordsofwisdom.domain.model.QuoteModel
  * Created by Silviu Pal on 11/10/2019.
  */
 interface GetQuotesList {
-    fun build(): Single<List<QuoteModel>>
+    fun build(): Single<ArrayList<QuoteModel>>
 }

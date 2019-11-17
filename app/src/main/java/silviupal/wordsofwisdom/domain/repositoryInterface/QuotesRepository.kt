@@ -9,7 +9,7 @@ import silviupal.wordsofwisdom.domain.model.QuoteModel
  * Created by Silviu Pal on 11/10/2019.
  */
 interface QuotesRepository {
-    fun getQuotesList(): Single<List<QuoteModel>>
+    fun getQuotesList(): Single<ArrayList<QuoteModel>>
     fun addNewQuote(quote: QuoteEntity): Completable
     fun deleteQuote(quote: QuoteEntity): Completable
     fun updateQuote(quote: QuoteEntity): Completable

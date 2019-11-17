@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Words of Wisdom</string>
+    <string name="fragment_quotes_list_title">Words of Wisdom</string>
 </resources>

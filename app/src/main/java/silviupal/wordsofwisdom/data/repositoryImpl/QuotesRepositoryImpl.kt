@@ -35,10 +35,10 @@ class QuotesRepositoryImpl(private val database: MyDatabase) : QuotesRepository 
                 .map(QuoteEntity::toQuoteModel)
     }
 
-    override fun getQuotesList(): Single<List<QuoteModel>> {
+    override fun getQuotesList(): Single<ArrayList<QuoteModel>> {
         return Single.just(database.daoQuote().getAllItems())
                 .map { quotesList ->
-                    val list = emptyList<QuoteModel>().toMutableList()
+                    val list = arrayListOf<QuoteModel>()
                     quotesList.forEach { list += it.toQuoteModel() }
                     list
                 }

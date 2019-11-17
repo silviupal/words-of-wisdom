@@ -11,7 +11,7 @@ import silviupal.wordsofwisdom.domain.usecasesInterface.GetQuotesList
  * Created by Silviu Pal on 11/10/2019.
  */
 class GetQuotesListImpl(private val quotesRepository: QuotesRepository) : GetQuotesList {
-    override fun build(): Single<List<QuoteModel>> =
+    override fun build(): Single<ArrayList<QuoteModel>> =
             quotesRepository.getQuotesList()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())

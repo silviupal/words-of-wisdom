@@ -14,11 +14,14 @@ class QuotesListPresenter(private val useCaseFactory: UseCaseFactory) : BasePres
     }
 
     fun getQuotesList() {
+        view?.showProgress()
         useCaseFactory.getQuotesListUseCase().build()
                 .subscribe({
-                    // build quotes list
+                    view?.hideProgress()
+                    view?.populateQuotesList(it)
                 }, { error ->
-                    // show error
+                    view?.hideProgress()
+                    view?.showError()
                 })
     }
 }
