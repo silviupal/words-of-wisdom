@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar_layout"
+        layout="@layout/toolbar_layout" />
+
+    <include layout="@layout/item_quote" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_spacing"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/input_quote_message">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etQuoteText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_spacing"
+                    android:background="@android:color/transparent"
+                    android:gravity="start"
+                    android:minLines="2"
+                    android:paddingTop="@dimen/default_small"
+                    tools:text="Together we will live forever" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/default_spacing"
+                android:background="@color/divider" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/input_quote_author">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etQuoteAuthor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_spacing"
+                    android:background="@android:color/transparent"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:paddingTop="@dimen/default_small"
+                    tools:text="Clint Mansell" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- TODO Background image -->
+            <!-- TODO Font selection -->
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

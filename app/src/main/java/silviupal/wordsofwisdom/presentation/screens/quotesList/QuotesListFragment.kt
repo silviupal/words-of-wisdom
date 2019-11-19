@@ -1,8 +1,11 @@
 package silviupal.wordsofwisdom.presentation.screens.quotesList
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.empty_screen_layout.*
 import kotlinx.android.synthetic.main.fragment_quotes_list.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import silviupal.wordsofwisdom.R
@@ -16,6 +19,7 @@ import silviupal.wordsofwisdom.presentation.base.BaseFragment
  */
 class QuotesListFragment : BaseFragment(), QuotesListView {
     lateinit var presenter: QuotesListPresenter
+    lateinit var router: QuotesListRouter
 
     companion object {
         @JvmField
@@ -28,6 +32,7 @@ class QuotesListFragment : BaseFragment(), QuotesListView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        router = QuotesListRouter(activity)
         presenter = QuotesListPresenter(context!!.app.useCaseFactory)
     }
 
@@ -37,18 +42,50 @@ class QuotesListFragment : BaseFragment(), QuotesListView {
         tbTitle.text = getString(R.string.fragment_quotes_list_title)
 
         initRecyclerView()
+        setAddNewQuoteAction()
         presenter.attach(this)
         presenter.getQuotesList()
     }
 
     private fun initRecyclerView() {
         context?.let { ctx ->
-            val adapter = QuotesListAdapter(ctx)
+            val adapter = QuotesListAdapter(ctx, ::showEditQuotePage)
             rvQuotesList.adapter = adapter
+            rvQuotesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    if (dy > 0) {
+                        fab.hide()
+                    } else {
+                        fab.show()
+                    }
+                }
+            })
         }
     }
 
+    private fun setAddNewQuoteAction() {
+        val addQuoteListener = View.OnClickListener { router.routeToAddQuote() }
+        fab.setOnClickListener(addQuoteListener)
+        ivAddQuote.setOnClickListener(addQuoteListener)
+    }
+
+    private fun showEditQuotePage(quote: QuoteModel) {
+        router.routeToEditQuote(quote)
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun showEmptyScreen() {
+        emptyLayout.visibility = View.VISIBLE
+        rvQuotesList.visibility = View.GONE
+        fab.visibility = View.GONE
+    }
+
+    @SuppressLint("RestrictedApi")
     override fun populateQuotesList(quotesList: ArrayList<QuoteModel>) {
+        emptyLayout.visibility = View.GONE
+        rvQuotesList.visibility = View.VISIBLE
+        fab.visibility = View.VISIBLE
+
         (rvQuotesList?.adapter as? QuotesListAdapter)?.setList(quotesList)
     }
 

@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</LinearLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEmptyTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvEmptySubtitle"
+        android:padding="@dimen/default_spacing"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        tools:text="Wisdom thoughts are missing" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEmptySubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/default_spacing"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        tools:text="Add new quote" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivAddQuote"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvEmptySubtitle"
+        android:layout_centerHorizontal="true"
+        android:src="@android:drawable/ic_menu_add" />
+
+</RelativeLayout>

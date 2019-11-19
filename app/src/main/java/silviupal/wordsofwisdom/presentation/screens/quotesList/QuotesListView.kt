@@ -10,4 +10,5 @@ interface QuotesListView {
     fun showProgress()
     fun hideProgress()
     fun showError()
+    fun showEmptyScreen()
 }

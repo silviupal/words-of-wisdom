@@ -12,7 +12,8 @@ import silviupal.wordsofwisdom.domain.model.QuoteModel
 /**
  * Created by Silviu Pal on 11/17/2019.
  */
-class QuotesListAdapter(private val context: Context) : RecyclerView.Adapter<QuotesListAdapter.ViewHolder>() {
+class QuotesListAdapter(private val context: Context,
+                        private val showEditQuotePage: (QuoteModel) -> Unit) : RecyclerView.Adapter<QuotesListAdapter.ViewHolder>() {
     private val list: ArrayList<QuoteModel> = arrayListOf()
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -35,6 +36,7 @@ class QuotesListAdapter(private val context: Context) : RecyclerView.Adapter<Quo
         fun bind(quote: QuoteModel) {
             itemView.tvQuoteText.text = quote.quoteText
             itemView.tvQuoteAuthor.text = quote.author ?: ""
+            itemView.setOnClickListener { showEditQuotePage(quote) }
             // TODO set dynamic font
             // TODO set background image
         }

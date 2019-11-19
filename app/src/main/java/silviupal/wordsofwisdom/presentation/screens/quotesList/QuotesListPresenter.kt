@@ -18,7 +18,11 @@ class QuotesListPresenter(private val useCaseFactory: UseCaseFactory) : BasePres
         useCaseFactory.getQuotesListUseCase().build()
                 .subscribe({
                     view?.hideProgress()
-                    view?.populateQuotesList(it)
+                    if (it.size == 0) {
+                        view?.showEmptyScreen()
+                    } else {
+                        view?.populateQuotesList(it)
+                    }
                 }, { error ->
                     view?.hideProgress()
                     view?.showError()

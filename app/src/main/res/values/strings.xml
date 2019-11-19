@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Words of Wisdom</string>
     <string name="fragment_quotes_list_title">Words of Wisdom</string>
+    <string name="fragment_add_quote_title">Add new quote</string>
+    <string name="fragment_edit_quote_title">Edit quote</string>
+    <string name="input_quote_message">Quote text *</string>
+    <string name="input_quote_author">Author</string>
 </resources>
