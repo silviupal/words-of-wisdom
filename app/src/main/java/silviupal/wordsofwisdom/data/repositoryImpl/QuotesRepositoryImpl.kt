@@ -12,35 +12,24 @@ import silviupal.wordsofwisdom.domain.repositoryInterface.QuotesRepository
  * Created by Silviu Pal on 11/10/2019.
  */
 class QuotesRepositoryImpl(private val database: MyDatabase) : QuotesRepository {
-    override fun addNewQuote(quote: QuoteEntity): Completable {
-        return Completable.create {
+    override fun addNewQuote(quote: QuoteEntity): Completable =
             database.daoQuote().insertOneItem(quote)
-        }
-    }
 
-    override fun deleteQuote(quote: QuoteEntity): Completable {
-        return Completable.create {
+    override fun deleteQuote(quote: QuoteEntity): Completable =
             database.daoQuote().deleteOneItem(quote)
-        }
-    }
 
-    override fun updateQuote(quote: QuoteEntity): Completable {
-        return Completable.create {
+    override fun updateQuote(quote: QuoteEntity): Completable =
             database.daoQuote().updateOneItem(quote)
-        }
-    }
 
-    override fun getQuoteById(id: Int): Single<QuoteModel> {
-        return Single.just(database.daoQuote().getListItemById(id))
-                .map(QuoteEntity::toQuoteModel)
-    }
+    override fun getQuoteById(id: Int): Single<QuoteModel> =
+            database.daoQuote().getListItemById(id)
+                    .map(QuoteEntity::toQuoteModel)
 
-    override fun getQuotesList(): Single<ArrayList<QuoteModel>> {
-        return Single.just(database.daoQuote().getAllItems())
-                .map { quotesList ->
-                    val list = arrayListOf<QuoteModel>()
-                    quotesList.forEach { list += it.toQuoteModel() }
-                    list
-                }
-    }
+    override fun getQuotesList(): Single<ArrayList<QuoteModel>> =
+            database.daoQuote().getAllItems()
+                    .map { quotesList ->
+                        val list = arrayListOf<QuoteModel>()
+                        quotesList.forEach { list += it.toQuoteModel() }
+                        list
+                    }
 }

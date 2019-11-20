@@ -6,7 +6,7 @@ import io.reactivex.disposables.CompositeDisposable
  * Created by Silviu Pal on 11/10/2019.
  */
 abstract class BasePresenter<T> {
-    private val disposable = CompositeDisposable()
+    protected val disposable = CompositeDisposable()
 
     abstract var view: T?
 

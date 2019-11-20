@@ -18,8 +18,8 @@ import silviupal.wordsofwisdom.presentation.base.BaseFragment
  * Created by Silviu Pal on 11/1/2019.
  */
 class QuotesListFragment : BaseFragment(), QuotesListView {
-    lateinit var presenter: QuotesListPresenter
-    lateinit var router: QuotesListRouter
+    private lateinit var presenter: QuotesListPresenter
+    private lateinit var router: QuotesListRouter
 
     companion object {
         @JvmField

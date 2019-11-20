@@ -1,6 +1,8 @@
 package silviupal.wordsofwisdom.data.dao
 
 import androidx.room.*
+import io.reactivex.Completable
+import io.reactivex.Single
 import silviupal.wordsofwisdom.data.entity.QuoteEntity
 
 /**
@@ -8,18 +10,18 @@ import silviupal.wordsofwisdom.data.entity.QuoteEntity
  */
 @Dao
 interface DaoQuoteAccess {
-    @Insert
-    fun insertOneItem(quote: QuoteEntity)
-    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertOneItem(quote: QuoteEntity): Completable
+
     @Update
-    fun updateOneItem(post: QuoteEntity)
+    fun updateOneItem(post: QuoteEntity): Completable
 
     @Delete
-    fun deleteOneItem(post: QuoteEntity)
+    fun deleteOneItem(post: QuoteEntity): Completable
 
     @Query("SELECT * FROM quotes WHERE id = :itemId")
-    fun getListItemById(itemId: Int): QuoteEntity?
+    fun getListItemById(itemId: Int): Single<QuoteEntity?>
 
     @Query("SELECT * FROM quotes")
-    fun getAllItems(): List<QuoteEntity>
+    fun getAllItems(): Single<List<QuoteEntity>>
 }
