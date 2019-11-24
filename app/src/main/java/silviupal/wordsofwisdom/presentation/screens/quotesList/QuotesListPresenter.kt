@@ -10,7 +10,9 @@ class QuotesListPresenter(private val useCaseFactory: UseCaseFactory) : BasePres
     override var view: QuotesListView? = null
 
     override fun attach(view: QuotesListView) {
-        this.view = view
+        if (this.view == null) {
+            this.view = view
+        }
     }
 
     fun getQuotesList() {

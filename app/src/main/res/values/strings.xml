@@ -5,4 +5,11 @@
     <string name="fragment_edit_quote_title">Edit quote</string>
     <string name="input_quote_message">Quote text *</string>
     <string name="input_quote_author">Author</string>
+    <string name="default_quote_text">Write your favorite quote…</string>
+    <string name="default_author_text">Author</string>
+    <string name="empty_screen_title">Wisdom thoughts are missing</string>
+    <string name="empty_screen_subtitle">Add new quote</string>
+    <string name="btn_save_quote">Save quote</string>
+    <string name="btn_update_quote">Update quote</string>
+    <string name="error_empty_field">This field should not be empty</string>
 </resources>

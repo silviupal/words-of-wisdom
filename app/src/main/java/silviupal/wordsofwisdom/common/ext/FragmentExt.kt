@@ -3,6 +3,7 @@ package silviupal.wordsofwisdom.common.ext
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import silviupal.wordsofwisdom.presentation.activities.MainActivity
 
 /**
@@ -26,4 +27,11 @@ fun Fragment.initToolbar(toolbar: Toolbar) {
             }
         }
     }
+}
+
+fun FragmentTransaction.hideOldFragment(activity: androidx.fragment.app.FragmentActivity): FragmentTransaction {
+    val fragmentList = activity.supportFragmentManager.fragments
+    fragmentList.filter { fragment -> fragment.isVisible }
+            .forEach { fragment -> hide(fragment) }
+    return this
 }

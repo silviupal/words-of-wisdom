@@ -1,5 +1,6 @@
 package silviupal.wordsofwisdom.data.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import silviupal.wordsofwisdom.domain.model.QuoteModel
@@ -13,8 +14,10 @@ data class QuoteEntity(
         var id: Int,
         val quote: String,
         val author: String?,
-        val backgroundImageUrl: String?,
-        val font: String)
+        @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+        val image: ByteArray?,
+        val font: String,
+        val textSizeInPx: Int)
 
 fun QuoteEntity.toQuoteModel(): QuoteModel =
-            QuoteModel(id, quote, author, backgroundImageUrl, font)
+        QuoteModel(id, quote, author, image, font, textSizeInPx)

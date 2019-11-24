@@ -5,6 +5,7 @@ import silviupal.wordsofwisdom.R
 import silviupal.wordsofwisdom.presentation.base.BaseActivity
 import silviupal.wordsofwisdom.presentation.screens.quotesList.QuotesListFragment
 
+
 /**
  * Created by Silviu Pal on 11/1/2019.
  */
@@ -14,5 +15,18 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setFragment(QuotesListFragment.newInstance(), QuotesListFragment.TAG)
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

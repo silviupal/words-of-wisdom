@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="appBackgroundColor">#F3F3F3</color>
+
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorSecondary">#8BC34A</color>
+    <color name="colorAccent">#8BC34A</color>
+
+    <color name="colorPrimaryDark">#BDC0C5</color>
+    <color name="textColorPrimary">#555555</color>
+    <color name="colorError">#FF5959</color>
+
+    <color name="material_drawer_selected">#1F8BC34A</color>
+    <color name="material_drawer_selected_text">#8BC34A</color>
+    <color name="material_drawer_background">#F9F9F9</color>
+
+    <color name="white">#FFFFFF</color>
+
+    <drawable name="clickable_text_view_selected">@color/material_drawer_selected</drawable>
+    <drawable name="clickable_text_view">@color/colorPrimary</drawable>
 
     <color name="divider">#cccccc</color>
+    <color name="icons_color">#aaaaaa</color>
+
 </resources>

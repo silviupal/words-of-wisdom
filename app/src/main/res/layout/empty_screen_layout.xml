@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvEmptySubtitle"
         android:padding="@dimen/default_spacing"
+        android:text="@string/empty_screen_title"
         android:textAlignment="center"
+        android:textColor="@color/textColorPrimary"
         android:textSize="20sp"
         tools:text="Wisdom thoughts are missing" />
 
@@ -21,7 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/default_spacing"
+        android:text="@string/empty_screen_subtitle"
         android:textAlignment="center"
+        android:textColor="@color/textColorPrimary"
         android:textSize="14sp"
         tools:text="Add new quote" />
 
@@ -31,6 +36,6 @@
         android:layout_height="50dp"
         android:layout_below="@id/tvEmptySubtitle"
         android:layout_centerHorizontal="true"
-        android:src="@android:drawable/ic_menu_add" />
+        app:srcCompat="@drawable/ic_plus_circle" />
 
 </RelativeLayout>
