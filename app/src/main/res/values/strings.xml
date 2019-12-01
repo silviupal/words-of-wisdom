@@ -12,4 +12,5 @@
     <string name="btn_save_quote">Save quote</string>
     <string name="btn_update_quote">Update quote</string>
     <string name="error_empty_field">This field should not be empty</string>
+    <string name="default_font_text">Wisdom</string>
 </resources>

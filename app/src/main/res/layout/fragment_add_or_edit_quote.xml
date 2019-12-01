@@ -127,23 +127,15 @@
 
                     </RelativeLayout>
 
-
-                    <FrameLayout
-                        android:id="@+id/rvFontSize"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvFontsList"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/default_spacing"
-                        android:layout_marginBottom="@dimen/default_spacing"
-                        android:background="@color/colorSecondary" />
-
-                    <!-- TODO Font list - RecyclerView -->
-                    <FrameLayout
-                        android:id="@+id/rvFontList"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="@dimen/default_spacing"
-                        android:layout_marginBottom="@dimen/default_spacing"
-                        android:background="@color/colorPrimaryDark" />
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="6"
+                        tools:listitem="@layout/item_font" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

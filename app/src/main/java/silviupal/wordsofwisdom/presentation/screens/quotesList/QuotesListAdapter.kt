@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_quote.view.*
 import silviupal.wordsofwisdom.R
+import silviupal.wordsofwisdom.common.FontsFactory
+import silviupal.wordsofwisdom.common.ext.toSp
 import silviupal.wordsofwisdom.domain.model.QuoteModel
 
 /**
@@ -17,7 +19,7 @@ class QuotesListAdapter(private val context: Context,
     private val list: ArrayList<QuoteModel> = arrayListOf()
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             ViewHolder(inflater.inflate(R.layout.item_quote, parent, false))
 
     override fun getItemCount(): Int = list.size
@@ -32,12 +34,16 @@ class QuotesListAdapter(private val context: Context,
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(quote: QuoteModel) {
             itemView.tvQuoteText.text = quote.quoteText
+            itemView.tvQuoteText.textSize = quote.textSizeInPx.toSp.toFloat()
             itemView.tvQuoteAuthor.text = quote.author ?: ""
             itemView.setOnClickListener { showEditQuotePage(quote) }
-            // TODO set dynamic font
+            val fontEnumValue = FontsFactory.Fonts.values().firstOrNull { it.fontName == quote.font }
+            fontEnumValue?.let {
+                itemView.tvQuoteText.typeface = FontsFactory(context).getTypeface(it)
+            }
             // TODO set background image
         }
     }

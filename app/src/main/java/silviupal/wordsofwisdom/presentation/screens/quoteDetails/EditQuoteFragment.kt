@@ -5,6 +5,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.fragment_add_or_edit_quote.*
 import kotlinx.android.synthetic.main.item_quote.*
 import silviupal.wordsofwisdom.R
+import silviupal.wordsofwisdom.common.FontsFactory
 import silviupal.wordsofwisdom.common.ext.toSp
 import silviupal.wordsofwisdom.domain.model.QuoteModel
 
@@ -39,9 +40,14 @@ class EditQuoteFragment : QuoteFragment() {
             etQuoteText.setText(model.quoteText)
             etQuoteText.setSelection(etQuoteText.text?.toString()?.length ?: 0)
 
-            sbQuoteTextSize.progress = model.textSizeInPx
+            sbQuoteTextSize.progress = model.textSizeInPx.toSp
             tvQuoteText.textSize = model.textSizeInPx.toFloat().toSp
 
+            val fontEnumValue = FontsFactory.Fonts.values().firstOrNull { it.fontName == model.font }
+            fontEnumValue?.let {
+                fontName = model.font
+                tvQuoteText.typeface = FontsFactory(context!!).getTypeface(it)
+            }
             // TODO Set image
         }
     }
@@ -53,7 +59,7 @@ class EditQuoteFragment : QuoteFragment() {
     override fun buildQuoteModel(): QuoteModel {
         val quoteText = etQuoteText.text!!.toString()
         val quoteAuthor = etQuoteAuthor.text?.toString()
-        //TODO Add Image and Font
-        return QuoteModel(this.model.id, quoteText, quoteAuthor, null, "", tvQuoteText.textSize.toInt())
+        //TODO Add Image
+        return QuoteModel(this.model.id, quoteText, quoteAuthor, null, fontName, tvQuoteText.textSize.toInt())
     }
 }

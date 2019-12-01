@@ -10,4 +10,5 @@
     <dimen name="text_size_toolbar">20sp</dimen>
     <dimen name="icon_size">32dp</dimen>
     <dimen name="small_icon_size">24dp</dimen>
+    <dimen name="text_size_font">36sp</dimen>
 </resources>

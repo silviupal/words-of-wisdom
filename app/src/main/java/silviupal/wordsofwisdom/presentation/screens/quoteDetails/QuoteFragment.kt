@@ -1,6 +1,7 @@
 package silviupal.wordsofwisdom.presentation.screens.quoteDetails
 
 import android.app.Activity
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_add_or_edit_quote.*
 import kotlinx.android.synthetic.main.item_quote.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import silviupal.wordsofwisdom.R
+import silviupal.wordsofwisdom.common.FontsFactory
 import silviupal.wordsofwisdom.common.SimplifiedSeekBarListener
 import silviupal.wordsofwisdom.common.SimplifiedTextWatcher
 import silviupal.wordsofwisdom.common.ext.app
@@ -26,6 +28,8 @@ import silviupal.wordsofwisdom.presentation.base.BaseFragment
  * Created by Silviu Pal on 11/19/2019.
  */
 abstract class QuoteFragment : BaseFragment(), QuoteView {
+    protected var fontName = FontsFactory.Fonts.DEFAULT.fontName
+
     private lateinit var quoteWatcher: TextWatcher
     private lateinit var authorWatcher: TextWatcher
     lateinit var model: QuoteModel
@@ -54,15 +58,14 @@ abstract class QuoteFragment : BaseFragment(), QuoteView {
         setWatchers()
         setEditActions()
         setTextSizeSlider()
+        setFontsList()
     }
 
     private fun setEditActions() {
         ivEditImage.visibility = View.VISIBLE
-
         ivEditImage.setOnClickListener {
             // TODO
         }
-
         btnConfirm.setOnClickListener {
             if (isFormValidated()) {
                 updateDatabase(buildQuoteModel())
@@ -86,7 +89,9 @@ abstract class QuoteFragment : BaseFragment(), QuoteView {
             }
         }
 
+        etQuoteText.removeTextChangedListener(quoteWatcher)
         etQuoteText.addTextChangedListener(quoteWatcher)
+        etQuoteAuthor.removeTextChangedListener(authorWatcher)
         etQuoteAuthor.addTextChangedListener(authorWatcher)
         etQuoteText.setOnEditorActionListener(getEditorListener())
         etQuoteAuthor.setOnEditorActionListener(getEditorListener())
@@ -103,15 +108,15 @@ abstract class QuoteFragment : BaseFragment(), QuoteView {
 
     private fun setTextSizeSlider() {
         sbQuoteTextSize.apply {
-            progress = tvQuoteText.textSize.toInt()
+            progress = tvQuoteText.textSize.toSp.toInt()
             tvTextSizeCounter.text = progress.toString()
 
             setOnSeekBarChangeListener(object : SimplifiedSeekBarListener() {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                     super.onProgressChanged(seekBar, progress, fromUser)
-                    seekBar?.let { sb ->
-                        tvTextSizeCounter.text = progress.toString()
-                        tvQuoteText.textSize = progress.toFloat().toSp
+                    seekBar?.let {
+                        tvQuoteText.textSize = progress.toSp.toFloat()
+                        tvTextSizeCounter.text = tvQuoteText.textSize.toString()
                     }
                 }
             })
@@ -123,6 +128,17 @@ abstract class QuoteFragment : BaseFragment(), QuoteView {
         // TODO Establish a UNIT to measure text size. Pixels or SP. Convert correctly
     }
 
+    private fun setFontsList() {
+        context?.let { ctx ->
+            val adapter = FontsAdapter(ctx, ::setQuoteTypeface)
+            rvFontsList.adapter = adapter
+        }
+    }
+
+    private fun setQuoteTypeface(typeface: Typeface, fontName: String) {
+        tvQuoteText.typeface = typeface
+        this.fontName = fontName
+    }
 
     private fun isFormValidated(): Boolean =
             if (etQuoteText.text!!.isEmpty()) {

@@ -3,6 +3,7 @@ package silviupal.wordsofwisdom.presentation.screens.quoteDetails
 import kotlinx.android.synthetic.main.fragment_add_or_edit_quote.*
 import kotlinx.android.synthetic.main.item_quote.*
 import silviupal.wordsofwisdom.R
+import silviupal.wordsofwisdom.common.FontsFactory
 import silviupal.wordsofwisdom.domain.model.QuoteModel
 
 /**
@@ -28,6 +29,6 @@ class AddQuoteFragment : QuoteFragment() {
         val quoteText = etQuoteText.text!!.toString()
         val quoteAuthor = etQuoteAuthor.text?.toString()
         //TODO Add Image and Font
-        return QuoteModel(quoteText, quoteAuthor, null, "", tvQuoteText.textSize.toInt())
+        return QuoteModel(quoteText, quoteAuthor, null, fontName, tvQuoteText.textSize.toInt())
     }
 }
