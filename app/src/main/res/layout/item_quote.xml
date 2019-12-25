@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivEditImage"
+            android:id="@+id/ivQuoteBackImage"
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
             android:layout_alignParentEnd="true"

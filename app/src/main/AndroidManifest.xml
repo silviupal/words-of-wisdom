@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="silviupal.wordsofwisdom">
@@ -12,15 +13,32 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <receiver android:name=".WowWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/wow_widget_info" />
+        </receiver>
 
         <activity
             android:name=".presentation.activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="open"
+                    android:scheme="wordsofwisdom" />
             </intent-filter>
         </activity>
-
     </application>
+
 </manifest>

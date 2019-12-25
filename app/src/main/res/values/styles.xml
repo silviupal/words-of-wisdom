@@ -19,4 +19,12 @@
         <item name="android:paddingBottom">@dimen/default_double</item>
     </style>
 
+    <style name="AppWidgetSection" parent="@android:style/Widget">
+        <item name="android:padding">@dimen/default_spacing</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
 </resources>

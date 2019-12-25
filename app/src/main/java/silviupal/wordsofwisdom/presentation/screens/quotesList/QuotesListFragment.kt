@@ -2,6 +2,7 @@ package silviupal.wordsofwisdom.presentation.screens.quotesList
 
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -11,19 +12,21 @@ import kotlinx.android.synthetic.main.empty_screen_layout.*
 import kotlinx.android.synthetic.main.fragment_quotes_list.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import silviupal.wordsofwisdom.R
+import silviupal.wordsofwisdom.WowWidget
 import silviupal.wordsofwisdom.common.ext.app
 import silviupal.wordsofwisdom.common.ext.initToolbar
+import silviupal.wordsofwisdom.common.ext.updateWidget
 import silviupal.wordsofwisdom.domain.model.QuoteModel
 import silviupal.wordsofwisdom.presentation.base.BaseFragment
 
 /**
  * Created by Silviu Pal on 11/1/2019.
  */
-class QuotesListFragment : BaseFragment(), QuotesListView {
+class QuotesListFragment : BaseFragment(), QuoteListView {
     private lateinit var router: QuotesListRouter
 
     private val presenter by lazy {
-        QuotesListPresenter(context!!.app.useCaseFactory)
+        QuoteListPresenter(context!!.app.useCaseFactory)
     }
 
     companion object {
@@ -50,19 +53,19 @@ class QuotesListFragment : BaseFragment(), QuotesListView {
         initRecyclerView()
         setAddNewQuoteAction()
         presenter.attach(this)
-        presenter.getQuotesList()
+        presenter.getQuoteList()
     }
 
     private fun initRecyclerView() {
         context?.let { ctx ->
-            val adapter = QuotesListAdapter(ctx, ::showEditQuotePage)
-            rvQuotesList.adapter = adapter
-            rvQuotesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            val adapter = QuoteListAdapter(ctx, ::showEditQuotePage)
+            rvQuoteList.adapter = adapter
+            rvQuoteList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     if (dy > 0) {
-                        fab.hide()
+                        fabAddQuote.hide()
                     } else {
-                        fab.show()
+                        fabAddQuote.show()
                     }
                 }
             })
@@ -71,7 +74,7 @@ class QuotesListFragment : BaseFragment(), QuotesListView {
 
     private fun setAddNewQuoteAction() {
         val addQuoteListener = View.OnClickListener { router.routeToAddQuote(REQUEST_CODE_ADD, this) }
-        fab.setOnClickListener(addQuoteListener)
+        fabAddQuote.setOnClickListener(addQuoteListener)
         ivAddQuote.setOnClickListener(addQuoteListener)
     }
 
@@ -81,19 +84,27 @@ class QuotesListFragment : BaseFragment(), QuotesListView {
 
     @SuppressLint("RestrictedApi")
     override fun showEmptyScreen() {
+        context?.let {
+            it.updateWidget()
+            it.app.sharedPrefs.edit()
+                    .putInt(WowWidget.PREFS_POSITION, -1)
+                    .apply()
+        }
+
         emptyLayout.visibility = View.VISIBLE
-        rvQuotesList.visibility = View.GONE
-        fab.visibility = View.GONE
+        rvQuoteList.visibility = View.GONE
+        fabAddQuote.visibility = View.GONE
     }
 
     @SuppressLint("RestrictedApi")
-    override fun populateQuotesList(quotesList: ArrayList<QuoteModel>) {
-        emptyLayout.visibility = View.GONE
-        rvQuotesList.visibility = View.VISIBLE
-        fab.visibility = View.VISIBLE
+    override fun populateQuoteList(quoteList: ArrayList<QuoteModel>) {
+        context?.let(Context::updateWidget)
 
-        (rvQuotesList?.adapter as? QuotesListAdapter)?.setList(quotesList)
-        if (quotesList.isNotEmpty()) rvQuotesList?.scrollToPosition(0)
+        emptyLayout.visibility = View.GONE
+        rvQuoteList.visibility = View.VISIBLE
+        fabAddQuote.visibility = View.VISIBLE
+        (rvQuoteList?.adapter as? QuoteListAdapter)?.setList(quoteList)
+        if (quoteList.isNotEmpty()) rvQuoteList?.scrollToPosition(0)
     }
 
     override fun showProgress() {
@@ -114,13 +125,10 @@ class QuotesListFragment : BaseFragment(), QuotesListView {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             when (requestCode) {
-                REQUEST_CODE_ADD -> {
-                    presenter.attach(this)
-                    presenter.getQuotesList()
-                }
+                REQUEST_CODE_ADD,
                 REQUEST_CODE_EDIT -> {
                     presenter.attach(this)
-                    presenter.getQuotesList()
+                    presenter.getQuoteList()
                 }
             }
         }

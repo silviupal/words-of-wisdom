@@ -10,7 +10,11 @@ abstract class BasePresenter<T> {
 
     abstract var view: T?
 
-    abstract fun attach(view: T)
+    fun attach(view: T) {
+        if (this.view == null) {
+            this.view = view
+        }
+    }
 
     fun detach() {
         disposable.clear()

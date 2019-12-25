@@ -17,7 +17,7 @@
         android:layout_below="@+id/toolbar_layout">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvQuotesList"
+            android:id="@+id/rvQuoteList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
@@ -31,7 +31,7 @@
             tools:visibility="visible" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/fabAddQuote"
             style="@style/Widget.MaterialComponents.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

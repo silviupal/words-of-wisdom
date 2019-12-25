@@ -6,24 +6,18 @@ import silviupal.wordsofwisdom.presentation.base.BasePresenter
 /**
  * Created by Silviu Pal on 11/10/2019.
  */
-class QuotesListPresenter(private val useCaseFactory: UseCaseFactory) : BasePresenter<QuotesListView>() {
-    override var view: QuotesListView? = null
+class QuoteListPresenter(private val useCaseFactory: UseCaseFactory) : BasePresenter<QuoteListView>() {
+    override var view: QuoteListView? = null
 
-    override fun attach(view: QuotesListView) {
-        if (this.view == null) {
-            this.view = view
-        }
-    }
-
-    fun getQuotesList() {
+    fun getQuoteList() {
         view?.showProgress()
-        disposable.add(useCaseFactory.getQuotesListUseCase().build()
+        disposable.add(useCaseFactory.getQuoteListUseCase().build()
                 .subscribe({
                     view?.hideProgress()
                     if (it.size == 0) {
                         view?.showEmptyScreen()
                     } else {
-                        view?.populateQuotesList(it)
+                        view?.populateQuoteList(it)
                     }
                 }, {
                     view?.hideProgress()

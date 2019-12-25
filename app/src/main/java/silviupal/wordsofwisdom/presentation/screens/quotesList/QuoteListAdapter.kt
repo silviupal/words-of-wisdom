@@ -14,8 +14,8 @@ import silviupal.wordsofwisdom.domain.model.QuoteModel
 /**
  * Created by Silviu Pal on 11/17/2019.
  */
-class QuotesListAdapter(private val context: Context,
-                        private val showEditQuotePage: (QuoteModel) -> Unit) : RecyclerView.Adapter<QuotesListAdapter.ViewHolder>() {
+class QuoteListAdapter(private val context: Context,
+                       private val showEditQuotePage: (QuoteModel) -> Unit) : RecyclerView.Adapter<QuoteListAdapter.ViewHolder>() {
     private val list: ArrayList<QuoteModel> = arrayListOf()
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 

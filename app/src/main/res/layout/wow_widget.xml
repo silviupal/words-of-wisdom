@@ -1,0 +1,114 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppWidgetSection"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/widget"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@color/colorPrimary"
+    android:padding="@dimen/widget_margin">
+
+    <RelativeLayout
+        android:id="@+id/quoteLayoutWidget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivQuoteBackImageWidget"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/default_spacing"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_image_edit"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvQuoteTextWidget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:maxLines="7"
+            android:padding="@dimen/default_double"
+            android:text="@string/default_quote_text"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            tools:text="@string/default_quote_text" />
+
+        <TextView
+            android:id="@+id/tvQuoteAuthorWidget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/default_spacing"
+            android:text="@string/default_author_text"
+            tools:text="Autor" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/emptyLayoutWidget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvEmptyTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tvEmptySubtitle"
+            android:padding="@dimen/default_spacing"
+            android:text="@string/empty_screen_title"
+            android:textAlignment="center"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="20sp"
+            tools:text="Wisdom thoughts are missing" />
+
+        <TextView
+            android:id="@+id/tvEmptySubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/default_spacing"
+            android:text="@string/empty_screen_subtitle"
+            android:textAlignment="center"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="14sp"
+            tools:text="Add new quote" />
+
+        <ImageView
+            android:id="@+id/ivAddQuoteWidget"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/tvEmptySubtitle"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/ic_plus_circle" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="X"
+        android:textSize="72sp" />
+
+    <TextView
+        android:id="@+id/tvRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Y"
+        android:textSize="72sp" />
+
+</RelativeLayout>

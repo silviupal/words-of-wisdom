@@ -10,10 +10,6 @@ import silviupal.wordsofwisdom.presentation.base.BasePresenter
 class QuotePresenter(private val useCaseFactory: UseCaseFactory) : BasePresenter<QuoteView>() {
     override var view: QuoteView? = null
 
-    override fun attach(view: QuoteView) {
-        this.view = view
-    }
-
     fun addQuote(quoteModel: QuoteModel) {
         disposable.add(useCaseFactory.addQuoteUseCase().build(quoteModel)
                 .subscribe({

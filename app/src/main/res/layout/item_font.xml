@@ -15,7 +15,7 @@
         android:gravity="center"
         android:padding="@dimen/default_spacing"
         android:text="@string/default_font_text"
-        android:textSize="@dimen/text_size_font"
+        android:textSize="@dimen/text_size_font_list_item"
         tools:text="Wisdom" />
 
 </androidx.cardview.widget.CardView>

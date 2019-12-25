@@ -62,8 +62,8 @@ abstract class QuoteFragment : BaseFragment(), QuoteView {
     }
 
     private fun setEditActions() {
-        ivEditImage.visibility = View.VISIBLE
-        ivEditImage.setOnClickListener {
+        ivQuoteBackImage.visibility = View.VISIBLE
+        ivQuoteBackImage.setOnClickListener {
             // TODO
         }
         btnConfirm.setOnClickListener {
